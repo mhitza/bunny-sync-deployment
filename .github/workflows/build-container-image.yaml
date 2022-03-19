@@ -1,0 +1,25 @@
+name: Build Container Image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docker-container/*'
+      - '.github/workflows/build-container-images.yaml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u mhitza --password-stdin
+
+      - run: docker pull ghcr.io/mhitza/chicken-build-environment:latest || true
+
+      - run: docker build -t ghcr.io/mhitza/chicken-build-environment:latest .
+        working-directory: docker-container
+
+      - run: docker push ghcr.io/mhitza/chicken-build-environment:latest
