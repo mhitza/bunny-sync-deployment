@@ -176,6 +176,6 @@
       [else (display (string-append "SKIPPING " key)) (newline)])))
 
 (when (> (hash-table-size to_purge) 0)
-  (display "Purgin pull zone cache")
+  (display "Purging pull zone cache")
   (newline)
   (purge-bunny-pull-zone-cache))
