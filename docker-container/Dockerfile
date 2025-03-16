@@ -1,7 +1,7 @@
-FROM fedora:35
+FROM fedora:41
 
-ENV CHICKEN_VERSION 5.3.0
-ENV PLATFORM linux
+ENV CHICKEN_VERSION=5.3.0
+ENV PLATFORM=linux
 
 RUN dnf install -y make gcc gcc-c++ diffutils && dnf clean all
 
